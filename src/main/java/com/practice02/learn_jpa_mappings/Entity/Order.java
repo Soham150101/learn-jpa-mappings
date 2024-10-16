@@ -43,7 +43,7 @@ public class Order {
 
 //    @Setter(AccessLevel.NONE)
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_id_from_product")
+    @JoinColumn(name = "order_id_from_order")
     private List<Product> products;
 
     public void addProduct(Product product){
