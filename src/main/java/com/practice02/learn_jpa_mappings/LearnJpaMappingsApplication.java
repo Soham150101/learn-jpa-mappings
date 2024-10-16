@@ -1,11 +1,7 @@
 package com.practice02.learn_jpa_mappings;
 
-import com.practice02.learn_jpa_mappings.Entity.Address;
-import com.practice02.learn_jpa_mappings.Entity.Order;
-import com.practice02.learn_jpa_mappings.Entity.Product;
-import com.practice02.learn_jpa_mappings.Repository.AddressRepository;
-import com.practice02.learn_jpa_mappings.Repository.OrderRepository;
-import com.practice02.learn_jpa_mappings.Repository.ProductRepository;
+import com.practice02.learn_jpa_mappings.Entity.*;
+import com.practice02.learn_jpa_mappings.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,13 +13,11 @@ import java.math.BigDecimal;
 public class LearnJpaMappingsApplication implements CommandLineRunner {
 
 	@Autowired
-	private OrderRepository orderRepository;
+	private StudentRepository studentRepository;
 
 	@Autowired
-	private AddressRepository addressRepository;
+	private CourseRepository courseRepository;
 
-	@Autowired
-	private ProductRepository productRepository;
 
 	public static void main(String[] args) {
 
@@ -33,43 +27,46 @@ public class LearnJpaMappingsApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Order order = new Order();
+		Student student1=new Student();
 
-		order.setOrderTrackingNumber("1000");
-		order.setStatus("COMPLETED");
-		order.setTotalPrice(new BigDecimal(2000));
-		order.setTotalQuantity(5);
+		student1.setId(12345L);
+		student1.setName("ABC");
 
-		Product firstProduct=new Product();
-		firstProduct.setId(1001L);
-		firstProduct.setName("Product 1");
-		firstProduct.setDescription("Its good Product 1");
-		firstProduct.setPrice(1099.99f);
+		Student student2=new Student();
 
-		Product secondProduct=new Product();
-		secondProduct.setId(2001L);
-		secondProduct.setName("Product 2");
-		secondProduct.setDescription("Its good Product 2");
-		secondProduct.setPrice(111.111f);
+		student2.setId(98765L);
+		student2.setName("PQR");
 
-		order.addProduct(firstProduct);
-		order.addProduct(secondProduct);
+		Course mathematics=new Course();
+		mathematics.setId(1001L);
+		mathematics.setName("Mathematics");
 
+		Course physics=new Course();
+		physics.setId(2002L);
+		physics.setName("Physics");
 
+		Course chemistry=new Course();
+		chemistry.setId(2020L);
+		chemistry.setName("Chemistry");
 
-		Address billingAddress = new Address();
-		billingAddress.setAdressline1("hello");
-		billingAddress.setAdressline2("world");
-		billingAddress.setCity("X");
-		billingAddress.setState("Y");
-		billingAddress.setCountry("Z");
-		billingAddress.setZipcode("12345");
+		Course bio=new Course();
+		bio.setId(999L);
+		bio.setName("Biology");
 
-		billingAddress.setOrder(order);
+		courseRepository.save(mathematics);
+		courseRepository.save(physics);
+		courseRepository.save(chemistry);
+		courseRepository.save(bio);
 
-		order.setAddress(billingAddress);
+		student1.setCourses(mathematics);
+		student1.setCourses(physics);
+		student1.setCourses(chemistry);
 
-		orderRepository.save(order);
+		student2.setCourses(bio);
+		student2.setCourses(physics);
+		student2.setCourses(chemistry);
 
+		studentRepository.save(student1);
+		studentRepository.save(student2);
 	}
 }
