@@ -1,0 +1,9 @@
+
+one to many mapping unidirectional
+
+        order --> products
+
+        order table will not have any product details
+        but product table will have order_id reference(foreign key in table)
+
+

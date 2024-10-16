@@ -1,12 +1,16 @@
 package com.practice02.learn_jpa_mappings.Entity;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -37,5 +41,17 @@ public class Order {
 //    @JoinColumn
     private Address address;
 
+//    @Setter(AccessLevel.NONE)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id_from_product")
+    private List<Product> products;
+
+    public void addProduct(Product product){
+        if (this.products==null){
+            this.products=new ArrayList<>();
+        }
+
+        this.products.add(product);
+    }
 
 }

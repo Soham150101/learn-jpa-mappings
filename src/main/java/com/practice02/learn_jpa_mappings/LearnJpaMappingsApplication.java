@@ -2,8 +2,10 @@ package com.practice02.learn_jpa_mappings;
 
 import com.practice02.learn_jpa_mappings.Entity.Address;
 import com.practice02.learn_jpa_mappings.Entity.Order;
+import com.practice02.learn_jpa_mappings.Entity.Product;
 import com.practice02.learn_jpa_mappings.Repository.AddressRepository;
 import com.practice02.learn_jpa_mappings.Repository.OrderRepository;
+import com.practice02.learn_jpa_mappings.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,6 +22,9 @@ public class LearnJpaMappingsApplication implements CommandLineRunner {
 	@Autowired
 	private AddressRepository addressRepository;
 
+	@Autowired
+	private ProductRepository productRepository;
+
 	public static void main(String[] args) {
 
 		SpringApplication.run(LearnJpaMappingsApplication.class, args);
@@ -34,6 +39,23 @@ public class LearnJpaMappingsApplication implements CommandLineRunner {
 		order.setStatus("COMPLETED");
 		order.setTotalPrice(new BigDecimal(2000));
 		order.setTotalQuantity(5);
+
+		Product firstProduct=new Product();
+		firstProduct.setId(1001L);
+		firstProduct.setName("Product 1");
+		firstProduct.setDescription("Its good Product 1");
+		firstProduct.setPrice(1099.99f);
+
+		Product secondProduct=new Product();
+		secondProduct.setId(2001L);
+		secondProduct.setName("Product 2");
+		secondProduct.setDescription("Its good Product 2");
+		secondProduct.setPrice(111.111f);
+
+		order.addProduct(firstProduct);
+		order.addProduct(secondProduct);
+
+
 
 		Address billingAddress = new Address();
 		billingAddress.setAdressline1("hello");
