@@ -18,4 +18,8 @@ public class Product {
 
     private Float price;
 
+    @ManyToOne
+    @JoinColumn(name = "order_id_from_order")
+    private Order order;
+
 }

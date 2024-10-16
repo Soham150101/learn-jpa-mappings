@@ -41,9 +41,8 @@ public class Order {
 //    @JoinColumn
     private Address address;
 
-//    @Setter(AccessLevel.NONE)
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_id_from_order")
+    @Setter(AccessLevel.NONE)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "order")
     private List<Product> products;
 
     public void addProduct(Product product){
@@ -51,6 +50,8 @@ public class Order {
             this.products=new ArrayList<>();
         }
 
+        // *****imp  product should have reference of order
+        product.setOrder(this);
         this.products.add(product);
     }
 
