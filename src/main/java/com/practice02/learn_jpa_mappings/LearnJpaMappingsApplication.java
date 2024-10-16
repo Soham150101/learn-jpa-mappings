@@ -43,6 +43,9 @@ public class LearnJpaMappingsApplication implements CommandLineRunner {
 		billingAddress.setCountry("Z");
 		billingAddress.setZipcode("12345");
 
+		billingAddress.setOrder(order);
+
+		order.setAddress(billingAddress);
 
 		orderRepository.save(order);
 

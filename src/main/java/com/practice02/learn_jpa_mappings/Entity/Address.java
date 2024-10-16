@@ -16,7 +16,7 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "adds_id")
+    @Column(name = "adds_id")
     private Long addressId;
 
     private String adressline1;
@@ -30,6 +30,10 @@ public class Address {
     private String country;
 
     private String zipcode;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id_from_address", referencedColumnName = "order_id")
+    private Order order;
 
 }
 

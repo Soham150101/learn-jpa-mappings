@@ -14,6 +14,7 @@ import java.util.Date;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "order_id")
     private Long id;
 
     private String orderTrackingNumber;
@@ -31,9 +32,9 @@ public class Order {
     private Date lastUpdated;
 
 
-    @OneToOne(cascade=CascadeType.REMOVE)
-//    @JoinColumn(name = "address_id_from_user", referencedColumnName = "adds_id")
-    @JoinColumn
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "address_id_from_oder", referencedColumnName = "adds_id")
+//    @JoinColumn
     private Address address;
 
 
