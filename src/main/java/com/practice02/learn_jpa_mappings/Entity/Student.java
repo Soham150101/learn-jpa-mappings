@@ -19,7 +19,7 @@ public class Student {
     private String name;
 
 
-    @Setter(AccessLevel.NONE)
+
     @ManyToMany
     @JoinTable(
             name = "student_course",
@@ -28,11 +28,12 @@ public class Student {
     )
     private List<Course> courses;
 
-    public void setCourses(Course course){
+    public void addCourses(Course course){
         if (this.courses==null){
             this.courses=new ArrayList<>();
         }
 
+        course.getStudents().add(this);
         this.courses.add(course);
     }
 }
